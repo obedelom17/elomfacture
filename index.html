@@ -385,8 +385,8 @@
       <div class="actions">
         <button class="btn-bulk" id="bulkBtn" disabled>⚡ Valider tout</button>
         <button class="btn-export" id="exportBtn" disabled title="Export écritures comptables (Fichier > Importer dans Sage)">📥 Écritures Sage</button>
-        <button class="btn-export" id="exportCompteBtn" style="background:linear-gradient(135deg,#7C5CFC,#B06AFF);" title="Export plan comptable SYSCOHADA (Fichier > Importer dans Sage)">📋 Comptes Sage</button>
-        <button class="btn-export" id="exportJournalBtn" style="background:linear-gradient(135deg,#0A8F76,#12CFB0);" title="Export codes journaux (Structure > Codes journaux dans Sage)">📓 Journaux Sage</button>
+        <a class="btn-export" href="https://raw.githubusercontent.com/obedelom17/elomfacture/main/Import_comptes_ElomFacture.ema" download="Import_comptes_ElomFacture.ema" style="background:linear-gradient(135deg,#7C5CFC,#B06AFF);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">📋 Comptes S...</a>
+        <a class="btn-export" href="https://raw.githubusercontent.com/obedelom17/elomfacture/main/Import_ecritures_ElomFacture.ema" download="Import_ecritures_ElomFacture.ema" style="background:linear-gradient(135deg,#0A8F76,#12CFB0);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">📓 Journaux S...</a>
         <button class="btn-ghost" id="clearBtn">Vider</button>
       </div>
     </div>
@@ -1140,20 +1140,7 @@ exportBtn.addEventListener('click', ()=>{
 // ===== EXPORT COMPTES SAGE =====
 // Génère le plan comptable SYSCOHADA complet, format texte tabulé Sage 100 i7
 // Import via : Fichier > Importer > Plan comptable
-document.getElementById('exportCompteBtn').addEventListener('click', ()=>{
-  // Header Sage import comptes : Numero;Intitulé;Type (G=Général, D=Détail)
-  const header = 'Numéro\tIntitulé\tType\r\n';
-  const rows = FULL_ACCOUNTS.map(a => a[0] + '\t' + a[1] + '\tD').join('\r\n');
-  const content = header + rows + '\r\n';
-  const bytes = toLatin1Bytes(content);
-  const blob = new Blob([bytes], { type:'text/plain;charset=windows-1252;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'plan_comptable_syscohada_sage.txt';
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
-  toast('Plan comptable exporté : plan_comptable_syscohada_sage.txt', 'ok');
-});
+
 
 // ===== EXPORT JOURNAUX SAGE =====
 // Génère un fichier texte tabulé compatible import Sage 100 i7 (Structure > Codes journaux)
@@ -1170,21 +1157,7 @@ const JOURNALS_DEFINITION = [
 ];
 // Type Sage : A=Achats, V=Ventes, T=Trésorerie, D=Divers/OD
 
-document.getElementById('exportJournalBtn').addEventListener('click', ()=>{
-  const header = 'Code\tLibellé\tType\tCompte de trésorerie\r\n';
-  const rows = JOURNALS_DEFINITION.map(j=>
-    [j.code, j.libelle, j.type, j.compte_contrepartie].join('\t')
-  ).join('\r\n');
-  const content = header + rows + '\r\n';
-  const bytes = toLatin1Bytes(content);
-  const blob = new Blob([bytes], { type:'text/plain;charset=windows-1252;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'codes_journaux_sage.txt';
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
-  toast('Export journaux généré : codes_journaux_sage.txt', 'ok');
-});
+
 
 clearBtn.addEventListener('click', ()=>{
   if(!confirm('Vider tout le registre (factures non exportées seront perdues) ?')) return;
