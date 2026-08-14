@@ -263,7 +263,8 @@
   .acct-opt:hover{ background:var(--surface-2); padding-left:16px; }
   .acct-opt .code{ font-family: ui-monospace, monospace; color:var(--primary-3); margin-right:9px; font-weight:800; }
 
-  .actions{ display:flex; gap:8px; padding:14px 18px; border-top:1px solid var(--line); flex-wrap:nowrap; align-items:center; }
+  .actions{ display:flex; gap:8px; padding:10px 18px; border-top:1px solid var(--line); flex-wrap:nowrap; align-items:center; }
+  .actions-bottom{ border-top:none !important; padding-top:0 !important; }
   .actions .btn-bulk, .actions .btn-export, .actions .btn-ghost{ flex:1; min-width:0; font-size:12.5px; padding:10px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .actions a.btn-export{ border-radius:12px; font-weight:700; font-size:12.5px; padding:10px 6px; color:#fff; }
   button{ font-family:inherit; cursor:pointer; border:none; border-radius:12px; font-size:13.5px; font-weight:700; padding:11px 18px; transition: 0.18s transform, 0.18s box-shadow, 0.18s background, 0.18s filter; position:relative; overflow:hidden; }
@@ -283,7 +284,7 @@
   .btn-ghost{ background:transparent; color:var(--ink-soft); border:1.5px solid var(--line); }
   .btn-ghost:hover{ border-color:var(--ink-soft); color:var(--ink); transform: translateY(-1px); }
   .btn-export{ background:linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--primary-3)); background-size:220% 220%; color:#fff; animation: btnGrad 5s ease infinite; }
-  .btn-ecriture{ background: linear-gradient(135deg, var(--primary), var(--primary-2)) !important; animation:none !important; font-size:14px !important; padding:13px 20px !important; flex:2 !important; box-shadow: var(--shadow-lg); }
+  .btn-ecriture{ background: linear-gradient(135deg, var(--primary), var(--primary-2)) !important; animation:none !important; font-size:14px !important; padding:13px 20px !important; box-shadow: var(--shadow-lg); }
   .btn-ecriture:not(:disabled):hover{ filter:brightness(1.1); transform: translateY(-2px); box-shadow: 0 22px 46px rgba(124,92,252,0.34); }
   .btn-ecriture:disabled{ background: linear-gradient(135deg,#DCD9F2,#C8C5F0) !important; cursor:not-allowed; box-shadow:none; transform:none; }
   .btn-dl{ text-decoration:none !important; display:inline-flex !important; align-items:center !important; justify-content:center !important; }
@@ -387,9 +388,11 @@
       <div class="queue" id="queue">
         <div class="empty"><span class="ico">📂</span>Aucune facture pour l'instant.</div>
       </div>
-      <div class="actions">
+      <div class="actions actions-top">
         <button class="btn-bulk" id="bulkBtn" disabled>⚡ Valider tout</button>
         <button class="btn-export btn-ecriture" id="exportBtn" disabled title="Export écritures comptables (Fichier > Importer dans Sage)">📥 Écritures Sage</button>
+      </div>
+      <div class="actions actions-bottom">
         <a class="btn-export btn-dl" href="https://raw.githubusercontent.com/obedelom17/elomfacture/main/Import_comptes_ElomFacture.ema" download="Import_comptes_ElomFacture.ema" style="background:linear-gradient(135deg,#7C5CFC,#B06AFF);">📋 Comptes Sage</a>
         <a class="btn-export btn-dl" href="https://raw.githubusercontent.com/obedelom17/elomfacture/main/Import_ecritures_ElomFacture.ema" download="Import_ecritures_ElomFacture.ema" style="background:linear-gradient(135deg,#0A8F76,#12CFB0);">📓 Journaux Sage</a>
         <button class="btn-ghost" id="clearBtn">Vider</button>
